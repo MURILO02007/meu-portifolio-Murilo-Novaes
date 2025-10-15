@@ -32,11 +32,16 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: var(--transition);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -52,10 +57,21 @@
             align-items: center;
             padding: 20px 0;
             position: sticky;
-            top: 0;
-            background-color: var(--bg-color);
+            top: 30px; /* Não colado no topo */
+            background-color: var(--card-bg);
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
+            border-radius: 30px;
+            margin-top: 30px;
+            padding-left: 50px;
+            padding-right: 50px;
+            transform: translateY(0);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        header.scrolled {
+            transform: translateY(-10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
         }
 
         .logo {
@@ -64,11 +80,49 @@
             color: var(--primary-color);
         }
 
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
         .theme-toggle {
             background: var(--primary-color);
-            position: fixed;
-            right: 40px;
-            margin-top: 40px;
             color: white;
             border: none;
             padding: 10px 15px;
@@ -96,7 +150,7 @@
         }
 
         .hero-content h1 {
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             margin-bottom: 20px;
             line-height: 1.2;
         }
@@ -106,7 +160,7 @@
         }
 
         .hero-content p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             margin-bottom: 30px;
             color: var(--text-color);
             opacity: 0.9;
@@ -165,7 +219,7 @@
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 50px;
             position: relative;
             display: inline-block;
@@ -196,6 +250,14 @@
             border-radius: 15px;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .skill-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
         .skill-card:hover {
@@ -231,6 +293,14 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .project-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
         .project-card:hover {
@@ -301,6 +371,14 @@
         .resume-content {
             max-width: 600px;
             margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .resume-content.animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
         .resume-content p {
@@ -327,6 +405,14 @@
             border-radius: 15px;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .contact-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
         .contact-card:hover {
@@ -393,42 +479,133 @@
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 30px;
             }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
+            
+            .hero-image {
+                order: -1;
             }
-
-            .section-title {
-                font-size: 2rem;
+            
+            .profile-img {
+                max-width: 300px;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 2rem;
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                z-index: 99;
+                border-radius: 0 0 20px 20px;
             }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .theme-toggle {
+                position: static;
+                margin-top: 0;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
 
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            header {
+                padding-left: 20px;
+                padding-right: 20px;
+                top: 15px;
+            }
+            
+            .hero {
+                min-height: auto;
+                padding: 30px 0;
+            }
+            
+            .skills, .projects, .resume, .contact {
+                padding: 60px 0;
+            }
+            
+            .skill-card, .contact-card {
+                padding: 20px;
+            }
+            
             .btn {
                 padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .section-title::after {
+                width: 60px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .skills-grid, .contact-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .profile-img {
+                max-width: 250px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <button class="theme-toggle" onclick="mudarcor()">
-            <i class="fas fa-moon"></i> Modo Escuro
-        </button>
+        <header id="main-header">
+            <div class="logo">Murilo Novaes</div>
+            <nav>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-links" id="navLinks">
+                    <a href="#projetos">Projetos</a>
+                    <a href="#habilidades">Habilidades</a>
+                    <a href="#contato">Contato</a>
+                </div>
+            </nav>
+            <button class="theme-toggle" onclick="mudarcor()">
+                <i class="fas fa-moon"></i> Modo Escuro
+            </button>
+        </header>
 
         <section class="hero">
             <div class="hero-content">
                 <h1>Olá, eu sou <span class="highlight">Murilo Novaes</span></h1>
-                <p>Desenvolvedor Front-end com experiência em HTML, CSS e JavaScript. Apaixonado por criar experiências digitais incríveis e sempre em busca de novos desafios e aprendizados.</p>
+                <p>Sou estudante de Engenharia de Software com foco em desenvolvimento web, inteligência artificial e gestão de projetos digitais. Tenho facilidade em aprender novas tecnologias e buscar soluções criativas para desafios. Busco uma oportunidade de estágio para aplicar meus conhecimentos e evoluir na área de tecnologia.</p>
                 <a href="#projetos" class="btn">Ver Projetos</a>
             </div>
             <div class="hero-image">
@@ -436,7 +613,7 @@
             </div>
         </section>
 
-        <section class="skills">
+        <section class="skills" id="habilidades">
             <h2 class="section-title">Minhas Habilidades</h2>
             <div class="skills-grid">
                 <div class="skill-card">
@@ -533,13 +710,13 @@
             <h2 class="section-title">Currículo</h2>
             <div class="resume-content">
                 <p>Baixe meu currículo para conhecer mais sobre minha experiência profissional, formação acadêmica e qualificações.</p>
-                <a href="curriculo-murilo-novaes.pdf" class="btn btn-outline" download>
+                <a href="Murilo Novaes Gama Portifólio.pdf" class="btn btn-outline" download>
                     <i class="fas fa-download"></i> Baixar Currículo
                 </a>
             </div>
         </section>
 
-        <section class="contact">
+        <section class="contact" id="contato">
             <h2 class="section-title">Entre em Contato</h2>
             <div class="contact-info">
                 <div class="contact-card">
@@ -554,7 +731,7 @@
                         <i class="fas fa-envelope"></i>
                     </div>
                     <h3>Email</h3>
-                    <a href="mailto:murilong08.03@gmail.com" class="contact-link">murilong08.03@gmail.com</a>
+                    <a href="mailto:murilong08.03@gmail.com" class="contact-link">murilonovaes0803@gmail.com</a>
                 </div>
                 <div class="contact-card">
                     <div class="contact-icon">
@@ -574,7 +751,6 @@
                 <a href="https://www.linkedin.com/in/murillo-novaes-0a3130353" class="social-link" target="_blank">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                
             </div>
             <p class="copyright">© 2023 Murilo Novaes. Todos os direitos reservados.</p>
         </footer>
@@ -594,6 +770,102 @@
                 document.querySelector('.theme-toggle').innerHTML = '<i class="fas fa-moon"></i> Modo Escuro';
             }
         }
+        
+        // Menu hamburguer
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Animação ao rolar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animação do header ao rolar
+            const header = document.getElementById('main-header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Animação dos elementos ao aparecer na tela
+            const animatedElements = document.querySelectorAll('.skill-card, .project-card, .resume-content, .contact-card');
+            
+            // Função para verificar se o elemento está visível na tela
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Função para animar elementos quando aparecem na tela
+            function animateOnScroll() {
+                animatedElements.forEach(element => {
+                    if (isElementInViewport(element)) {
+                        element.classList.add('animate');
+                    }
+                });
+            }
+            
+            // Animar elementos que já estão visíveis
+            animateOnScroll();
+            
+            // Animar elementos quando a página é rolada
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Adicionar delay para cada elemento de habilidades
+            const skillCards = document.querySelectorAll('.skill-card');
+            skillCards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.1}s`;
+            });
+            
+            // Adicionar delay para cada projeto
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.1}s`;
+            });
+            
+            // Adicionar delay para cada contato
+            const contactCards = document.querySelectorAll('.contact-card');
+            contactCards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.1}s`;
+            });
+            
+            // Navegação suave para âncoras
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.getElementById('main-header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
