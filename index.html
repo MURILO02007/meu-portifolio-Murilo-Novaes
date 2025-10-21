@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Murilo Novaes | Desenvolvedor Front-end</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="Letra M em círculo azul.png" type="image/png">
     <style>
         :root {
             --primary-color: #6C63FF;
@@ -278,6 +279,7 @@
         /* Projects Section */
         .projects {
             padding: 80px 0;
+            text-align: center;
         }
 
         .projects-grid {
@@ -360,6 +362,12 @@
 
         .project-link:hover {
             color: var(--secondary-color);
+        }
+
+        /* Botão Ver Mais Projetos */
+        .more-projects {
+            margin-top: 50px;
+            text-align: center;
         }
 
         /* Resume Section */
@@ -595,6 +603,7 @@
                     <a href="#projetos">Projetos</a>
                     <a href="#habilidades">Habilidades</a>
                     <a href="#contato">Contato</a>
+                    <a href="certificado.html">Certificados</a>
                 </div>
             </nav>
             <button class="theme-toggle" onclick="mudarcor()">
@@ -637,72 +646,84 @@
                     <h3>JavaScript</h3>
                     <p>Interatividade e funcionalidades dinâmicas para web.</p>
                 </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3>Python</h3>
+                    <p>Desenvolvimento de aplicações, automação e análise de dados.</p>
+                </div>
+               
             </div>
         </section>
 
         <section class="projects" id="projetos">
             <h2 class="section-title">Meus Projetos</h2>
             <div class="projects-grid">
+                <!-- Projeto 1 -->
                 <div class="project-card">
-                    <img class="project-img" src="projrto 1.PNG" alt="Projeto 1">
+                    <img class="project-img" src="sitebeautyBook.png" alt="Agendamento online para salões">
                     <div class="project-content">
-                        <h3>Organizador de Eventos</h3>
-                        <p>Site para organização de eventos com palestras, desenvolvido como trabalho da faculdade.</p>
+                        <h3>Agendamento online para salões</h3>
+                        <p>Site focado em salões de beleza com sistema de agendamento online para clientes, e organização de clientes com página de administração.</p>
                         <div class="project-tags">
                             <span class="tag">HTML</span>
                             <span class="tag">CSS</span>
                             <span class="tag">JavaScript</span>
+                            <span class="tag">Responsivo</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Stripe API</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" target="_blank">
+                            <a href="https://agenda-salao2.vercel.app/" class="project-link" target="_blank">
                                 <i class="fas fa-external-link-alt"></i> Demo
-                            </a>
-                            <a href="#" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> Código
                             </a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Projeto 2 -->
                 <div class="project-card">
-                    <img class="project-img" src="Capturar.PNG" alt="Projeto 2">
+                    <img class="project-img" src="gamanovaes.png" alt="Casa de material de construção">
                     <div class="project-content">
-                        <h3>Loja de Fones</h3>
-                        <p>Site fictício de venda de fones, desenvolvido como trabalho voluntário.</p>
+                        <h3>Casa de material de construção</h3>
+                        <p>Site feito para o material de contrução Gama Novaes, com página de cadastro de produtos, página dos produtos, localização e contato, usando banco de dados do firebase.</p>
                         <div class="project-tags">
+                            <span class="tag">JavaScript</span>
                             <span class="tag">HTML</span>
                             <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
+                            <span class="tag">Firebase</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" target="_blank">
+                            <a href="https://gamanovaesav1-main.vercel.app/" class="project-link" target="_blank">
                                 <i class="fas fa-external-link-alt"></i> Demo
-                            </a>
-                            <a href="#" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> Código
                             </a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Projeto 3 -->
                 <div class="project-card">
-                    <img class="project-img" src="projeto3.PNG" alt="Projeto 3">
+                    <img class="project-img" src="cinthya.png" alt="Clínica Odontológica">
                     <div class="project-content">
-                        <h3>Material de Construção</h3>
-                        <p>Site para loja de material de construção, desenvolvido como trabalho da faculdade.</p>
+                        <h3>Clínica Odontológica</h3>
+                        <p>Site para uma clínica odontológica, com página de agendamento via whatsapp, página de blog, feito com inteligência artificial, e sistema de nótificação via whatsapp com api do google cloud.</p>
                         <div class="project-tags">
-                            <span class="tag">HTML</span>
+                            <span class="tag">HTML5</span>
                             <span class="tag">CSS</span>
                             <span class="tag">JavaScript</span>
+                            <span class="tag">Google Cloud API</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" target="_blank">
+                            <a href="https://doutora-cinthya.vercel.app/" class="project-link" target="_blank">
                                 <i class="fas fa-external-link-alt"></i> Demo
-                            </a>
-                            <a href="#" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> Código
                             </a>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="more-projects">
+                <a href="projetos.html" class="btn btn-outline">Ver mais</a>
             </div>
         </section>
 
